@@ -1,0 +1,25 @@
+	.6800
+FLEX=0xAD00
+	.org 0x200
+	.entry start
+start:
+;	ldx #message2
+;	jsr FLEX+0x1E
+
+	ldx #message
+	jsr print_str
+
+	jmp FLEX+0x03
+
+print_str:
+	ldaa ,x
+	beq .1
+	jsr FLEX+0x18
+	inx
+	bra print_str
+.1:
+	rts
+
+message:
+	.byte "Greetings!", 13, 10, 0
+
